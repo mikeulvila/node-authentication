@@ -2,7 +2,7 @@ extends layout
 
 block content
   .col-md-3
-    form.form-signin
+    form.form-signin(action='/login', method='POST')
       h2(class="form-signin-heading") Please sign in
       label(for="inputEmail", class="sr-only") Email address
       input(type="email", id="inputEmail", class="form-control", name='email', placeholder="Email address", required="", autofocus="")

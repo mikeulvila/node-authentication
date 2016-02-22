@@ -22,13 +22,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.render('index');
 });
-
+// login form
 app.get('/login', (req, res) => {
   res.render('login');
 });
-
+// submit login
 app.post('/login', (req, res) => {
   res.redirect('/');
+});
+// register form
+app.get('/register', (req, res) => {
+  res.render('register');
+});
+// submit register
+app.post('/register', (req, res) => {
+
+  if (req.body.password === req.body.verify) {
+    res.redirect('/login');
+  } else {
+    res.render('register', {
+      email: req.body.email,
+      message: 'Passwords do not match'
+    });
+  }
+
 });
 
 // server listen
