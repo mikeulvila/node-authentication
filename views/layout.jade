@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/vendor/bootstrap/dist/css/bootstrap.min.css', type='text/css')
+    link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css', type='text/css')
+    link(rel='stylesheet', href='/stylesheets/style.css', type='text/css')
+
+  body
+    .container
+      .row
+        block content
+
+    script(src='/vendor/jquery/dist/jquery.min.js')
+    script(src='/vendor/bootstrap/dist/js/bootstrap.min.js')
