@@ -1,6 +1,10 @@
 extends layout
 
 block content
+  each msgs, type in messages
+    for msg in msgs
+      p(class=type)= msg
+
   if user
     h1 Hello #{user.email}
     form(action='/login?_method=delete', method='POST')

@@ -2,6 +2,7 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
+const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const path = require('path');
 const passport = require('passport');
@@ -31,6 +32,9 @@ app.use(session({
   secret: SESSION_SECRET
 }));
 
+// connect-flash
+app.use(flash());
+
 // passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -49,6 +53,10 @@ app.use(methodOverride('_method'));
 // set local user
 app.use((req, res, next) => {
   app.locals.user = req.user;
+  next();
+});
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
   next();
 });
 
