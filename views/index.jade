@@ -3,3 +3,12 @@ extends layout
 block content
 
   h1 Hello #{user.email}
+
+  if user.email === 'Guest'
+    form(action='/login', method='GET')
+      button.btn.btn-primary Login
+  else
+    form(action='/login?_method=delete', method='POST')
+      button.btn.btn-primary Logout
+
+

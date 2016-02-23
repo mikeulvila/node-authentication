@@ -1,8 +1,9 @@
 'use strict';
 
-const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
+const express = require('express');
+const methodOverride = require('method-override');
+const path = require('path');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
@@ -36,6 +37,9 @@ app.use((req, res, next) => {
   req.session.visits[req.url]++;
   next();
 });
+
+// method override
+app.use(methodOverride('_method'));
 
 // set local user
 app.use((req, res, next) => {
