@@ -1,14 +1,13 @@
 extends layout
 
 block content
-
-  h1 Hello #{user.email}
-
-  if user.email === 'Guest'
-    form(action='/login', method='GET')
-      button.btn.btn-primary Login
-  else
+  if user
+    h1 Hello #{user.email}
     form(action='/login?_method=delete', method='POST')
       button.btn.btn-primary Logout
+  else
+    h1 Hello stranger, log your ass in.
+    form(action='/login', method='GET')
+      button.btn.btn-primary Login
 
 

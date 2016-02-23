@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const methodOverride = require('method-override');
 const path = require('path');
+const passport = require('passport');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 
@@ -30,6 +31,10 @@ app.use(session({
   secret: SESSION_SECRET
 }));
 
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // create own middleware
 app.use((req, res, next) => {
   req.session.visits = req.session.visits || {};
@@ -43,7 +48,7 @@ app.use(methodOverride('_method'));
 
 // set local user
 app.use((req, res, next) => {
-  app.locals.user = req.session.user || { email: 'Guest' };
+  app.locals.user = req.user;
   next();
 });
 
